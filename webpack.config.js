@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   entry: {
     //Entry points for runtime javascript & Tailwinf
-    bundle: './src/scripts/index.js',
+    bundle: './src/scripts/main.js',
     styles: './src/styles/tailwind.css',
   },
   mode: 'development',

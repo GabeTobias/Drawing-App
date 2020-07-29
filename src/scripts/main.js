@@ -1,11 +1,11 @@
 //Sass import
 import '../styles/styles.sass';
 
-//P5 Import
-import './p5';
-
 //SocketIO Import
 import io from 'socket.io-client';
+
+//DrawJS Import
+import * as renderer from './draw';
 
 
 //Connect to server
@@ -25,3 +25,9 @@ socket.on('message', data => {
     //Log Message
     console.log(data);
 });
+
+//Start Canvas Renderer
+renderer.InitRenderer();
+
+//Add Layer Test
+renderer.AddCanvas();
