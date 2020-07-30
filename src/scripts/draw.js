@@ -9,7 +9,7 @@ import * as input from './input'
 
 
 //Listing of all Canvas's open
-let canvasStack = [];
+let canvasStack = {};
 
 //Global p5 Conext
 let globalCanvas = {};
@@ -36,11 +36,9 @@ function InitRenderer() {
             //Clear Screen
             p5.background(40);
 
-            for (let i = 0; i < canvasStack.length; i++) {
-                //Render the canvas to screen
-                canvasStack[i].Render(p5);
-            }
-
+            //Draw the current canvas
+            canvasStack[globalInput.currentCanvas].Render(p5);
+            
             //Update Input Behaviour
             globalInput.Update(p5, canvasStack);
         }
@@ -62,10 +60,10 @@ function AddCanvas() {
     c.AddLayer(globalCanvas);
 
     //Add Canvas to canvas stack
-    canvasStack.push(c);
+    canvasStack[c.uid] = c;
 
     //Set current canvas
-    globalInput.currentCanvas = canvasStack.length - 1;
+    globalInput.currentCanvas = c.uid;
 }
 
 function AddLayer() {

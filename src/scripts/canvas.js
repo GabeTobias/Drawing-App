@@ -20,6 +20,9 @@ class Canvas {
 
     //Store the size of the current canvas
     this.size = size;
+
+    //Generate Unique ID
+    this.uid = Math.round(Math.random() * 100000000);
   }
 
   Render(p) {
@@ -37,6 +40,8 @@ class Canvas {
 
     //Draw Canvas to screen
     p.image(this.graphics, 0, 0);
+
+    console.log("Rendered Canvas");
   }
 
   AddLayer(p) {
