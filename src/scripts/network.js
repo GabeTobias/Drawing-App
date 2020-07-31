@@ -31,6 +31,9 @@ socket.on('eraser', data => { renderer.EraserTool(data.x,data.y, data.tool); });
 //Layer Update Callback
 socket.on('UpdateLayer', data => { renderer.SetLayer(data); });
 
+//User Cursor Callback
+socket.on('UpdateCursor', data => { renderer.UpdateCursor(data); });
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 //Join room server message
@@ -42,7 +45,10 @@ function ISetLayer(uid, data, index) { socket.emit('SetLayer', {uid: uid, index:
 //Send Event Server MEssage
 function IEvent(type, data){ socket.emit(type,data); }
 
+//Send User Curosr information
+function IUpdateCursor(data) { socket.emit('UpdateCursor', data); }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-export { IJoinRoom, ISetLayer, IEvent };
+export { IJoinRoom, ISetLayer, IEvent, IUpdateCursor };

@@ -14,6 +14,9 @@ let canvasStack = {};
 //Global p5 Conext
 let globalCanvas = {};
 
+//User Cursor Array
+let userCursors = {};
+
 
 function InitRenderer() {
     //Create Basic Canvas behaviour
@@ -27,6 +30,10 @@ function InitRenderer() {
                 globalInput.canvasSize.width,
                 globalInput.canvasSize.height
             );
+
+            //Adjust Stroke
+            p5.stroke(255);
+            p5.strokeWeight(1);
         }
 
         p5.draw = function () {
@@ -35,9 +42,28 @@ function InitRenderer() {
 
             //Draw the current canvas
             canvasStack[globalInput.currentCanvas].Render(p5);
-            
+         
+            //Draw User Cursors
+            Object.keys(userCursors).forEach((key,index) =>{
+                //Get Cursor object
+                let c = userCursors[key];
+
+                //Draw Cursor
+                p5.fill(255, 50);
+                p5.ellipse(c.x, c.y, c.radius, c.radius);
+            })
+
+            //Draw Cursor to screen
+            p5.fill(255, 50);
+            p5.ellipse(p5.mouseX, p5.mouseY, globalInput.toolSize, globalInput.toolSize);
+
             //Update Input Behaviour
             globalInput.Update(p5, canvasStack);
+        }
+
+        //Pass Scroll event to input
+        p5.mouseWheel = function(event) {
+            globalInput.Scroll(event.delta);
         }
     }
 
@@ -110,6 +136,18 @@ function getLayer(tool)
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
+function UpdateCursor(data)
+{
+    //Create and set Cursor Object from data packet
+    userCursors[data.name] = {
+        x: data.position.x,
+        y: data.position.y,
+        radius: data.radius
+    };
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
 
 function PenTool(x, y, tool = globalInput) {
     //Check if canvas is open
@@ -157,5 +195,6 @@ export {
     InitRenderer,                                   //Render Objects 
     AddCanvas, AddLayer, SetLayer,                  //Canvas DOM
     globalInput, globalCanvas,                      //Globals variables
-    PenTool, BrushTool, EraserTool, BucketTool      //User Interactions
+    PenTool, BrushTool, EraserTool, BucketTool,     //User Interactions
+    UpdateCursor                                    //HUD Functions
 }

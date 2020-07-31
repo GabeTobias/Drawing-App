@@ -73,6 +73,14 @@ io.on('connect', socket => {
 
     //////////////////////////////////////////////////////////////////////////////////////////
 
+    //Ping Pong User Cursor Information
+    socket.on('UpdateCursor', (data) => {
+        //Emit Event to users
+        socket.broadcast.emit('UpdateCursor', data);
+    });
+
+    //////////////////////////////////////////////////////////////////////////////////////////
+
     //Pen callback
     socket.on('pen', (data) => {
         //Emit Event to users

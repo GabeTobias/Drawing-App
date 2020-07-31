@@ -5,7 +5,7 @@ import * as p5 from './p5.js';
 import { PenTool, BrushTool, EraserTool, AddCanvas, AddLayer } from './draw.js';
 
 //Networl Interaction Events
-import {IEvent, ISetLayer} from './network'
+import {IEvent, ISetLayer, IUpdateCursor} from './network'
 
 class Input
 {
@@ -45,6 +45,9 @@ class Input
       if(this.toolType == 2) IEvent('eraser',{x:p.mouseX, y:p.mouseY, tool:this});
     }
 
+    //Send Cursor position Information
+    IUpdateCursor({name: 'DefaultName', position: {x:p.mouseX, y:p.mouseY}, radius: this.toolSize });
+
     //Detect keypress
     if(p.keyIsPressed && !this.clickHold) {
       
@@ -68,6 +71,12 @@ class Input
     //Reset Click Hold on release
     if(!p.keyIsPressed) this.clickHold = false;
 
+  }
+
+  //Process Mouse Scroll
+  Scroll(delta){
+   //Change Tool Radius on scroll
+   this.toolSize += delta * 0.1; 
   }
 }
 
