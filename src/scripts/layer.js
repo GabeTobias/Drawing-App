@@ -11,6 +11,9 @@ class Layer {
         //Store layer size
         this.size = size;
 
+        //Create Layer Name
+        this.name = 'layer';
+
         //Turn off stroke
         this.graphics.noStroke();
 

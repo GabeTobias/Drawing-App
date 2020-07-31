@@ -22,7 +22,7 @@ class Canvas {
     this.size = size;
 
     //Generate Unique ID
-    this.uid = Math.round(Math.random() * 100000000);
+    this.uid = '#1111';
   }
 
   Render(p) {
@@ -40,8 +40,6 @@ class Canvas {
 
     //Draw Canvas to screen
     p.image(this.graphics, 0, 0);
-
-    console.log("Rendered Canvas");
   }
 
   AddLayer(p) {
@@ -50,6 +48,12 @@ class Canvas {
 
     //Add Layer to layers array
     this.layers.push(l);
+
+    //Log the layer
+    console.log("layer added");
+
+    //Return the new layer
+    return l;
   }
 };
 

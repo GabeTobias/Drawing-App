@@ -1,6 +1,11 @@
 //P5 Import
 import * as p5 from './p5.js';
-import { PenTool, BrushTool, EraserTool } from './draw.js';
+
+//Renderer Functions
+import { PenTool, BrushTool, EraserTool, AddCanvas, AddLayer } from './draw.js';
+
+//Networl Interaction Events
+import {IEvent, ISetLayer} from './network'
 
 class Input
 {
@@ -33,21 +38,40 @@ class Input
       if(this.toolType == 0) PenTool(p.mouseX, p.mouseY, this);
       if(this.toolType == 1) BrushTool(p.mouseX, p.mouseY, this);
       if(this.toolType == 2) EraserTool(p.mouseX, p.mouseY, this);
+
+      //Send Interaction across network
+      if(this.toolType == 0) IEvent('pen',{x:p.mouseX, y:p.mouseY, tool:this});
+      if(this.toolType == 1) IEvent('brush',{x:p.mouseX, y:p.mouseY, tool:this});
+      if(this.toolType == 2) IEvent('eraser',{x:p.mouseX, y:p.mouseY, tool:this});
     }
 
-    //Detect keypress 'a'
-    if(p.keyIsPressed && p.key === 'a' && !this.clickHold) {
-      //Cycle threw tool states
-      this.toolType = (this.toolType + 1) % 3;
+    //Detect keypress
+    if(p.keyIsPressed && !this.clickHold) {
       
+      //@TEMP: Add Layer Hotkey
+      if(p.key === 'x') 
+      {
+        let layer = AddLayer();
+        ISetLayer(this.currentCanvas, {size: layer.size, name: layer.name}, this.currentLayer);
+      }
+
+      //@TEMP: Add Layer Hotkey
+      if(p.key === 'a') 
+      {
+        this.toolType = (this.toolType+1) % 3;
+      }
+
       //Process click
       this.clickHold = true;
     } 
     
     //Reset Click Hold on release
-    if(!p.keyIsPressed || p.key !== 'a') this.clickHold = false;
-  
+    if(!p.keyIsPressed) this.clickHold = false;
+
   }
 }
 
-export { Input }
+//Create Global Input object
+let globalInput = new Input();
+
+export { Input, globalInput }
