@@ -16,7 +16,7 @@
         <h2 class="border-b p-2 text-gray-700"> Layers </h2>
 
         <!-- Add new Layer button -->
-        <button class="absolute px-1 border" style="top:0.4rem; left:17%" onclick="addLayer()">+</button>
+        <button class="absolute px-1 border" style="top:0.4rem; left:17%" onclick="ToggleLayerMenu()">+</button>
 
         <!-- Layer element list location -->
         <div id="LayersGroup">
@@ -78,9 +78,9 @@
       </div>
 
       <!-- Modal Overlay -->
-      <div class="absolute w-4/5 h-full bg-black bg-opacity-50" style="left:20%;" id="CanvasOverlay" onclick="ToggleCanvasMenu()" hidden></div>
+      <div class="absolute w-4/5 h-full bg-black bg-opacity-50" style="left:20%;" id="CanvasOverlay" onclick="HideOverlays()" hidden></div>
 
-      <!-- Create Canvas Overlay -->
+      <!-- Create Layer Overlay -->
       <div class="absolute w-56 bg-white text-center shadow rounded" style="left: 48%; top:25vh; height:5.3rem;" id="CreateMenu" hidden>
         <h2 class="border-b border-t py-2 px-4 text-sm text-gray-500">Create Canvas</h2>
         
@@ -88,6 +88,19 @@
         <div class="mb-4 p-2 pt-3 text-left">
           <input class="w-3/4 float-left appearance-none border rounded rounded-r-none py-1 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:shadow-outline" id="canvasName" type="text" placeholder="Name">
           <button class="w-1/4 text-sm bg-orange-500 hover:bg-orange-600 text-white font-light py-1 px-1 rounded rounded-l-none leading-tight" onclick="addCanvas()">
+            create
+          </button>
+        </div>
+      </div>
+
+      <!-- Create Canvas Overlay -->
+      <div class="absolute w-56 bg-white text-center shadow rounded" style="left: 48%; top:25vh; height:5.3rem;" id="LayerMenu" hidden>
+        <h2 class="border-b border-t py-2 px-4 text-sm text-gray-500">Create Layer</h2>
+        
+        <!-- TODO: Refactor into css classes -->
+        <div class="mb-4 p-2 pt-3 text-left">
+          <input class="w-3/4 float-left appearance-none border rounded rounded-r-none py-1 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:shadow-outline" id="layerName" type="text" placeholder="Name">
+          <button class="w-1/4 text-sm bg-orange-500 hover:bg-orange-600 text-white font-light py-1 px-1 rounded rounded-l-none leading-tight" onclick="addLayer()">
             create
           </button>
         </div>

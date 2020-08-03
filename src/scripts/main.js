@@ -22,9 +22,6 @@ renderer.InitRenderer();
 //Add Initial Canvas
 renderer.AddCanvas();
 
-//Add Layer to Canvas
-renderer.AddLayer();
-
 //Join Network Room
 network.IJoinRoom(renderer.globalInput.currentCanvas);
 

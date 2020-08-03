@@ -119,11 +119,17 @@ function changeCanvas(uid) {
 }
 
 function addLayer() {
+  //Get Layer name input value
+  let name = document.getElementById('layerName').value;
+
   //Add Layer to renderer
-  renderer.AddLayer();
+  renderer.AddLayer(name);
 
   //Rerender DOM
   RenderLayers();
+
+  //Hide the Layer create Menu
+  ToggleLayerMenu();
 }
 
 function addCanvas() {
@@ -191,10 +197,29 @@ function ToggleCanvasMenu() {
   Modal.hidden = !Modal.hidden;
 }
 
+//Toggle Create Canvas Modal
+function ToggleLayerMenu() {
+  let Overlay = document.getElementById('CanvasOverlay');
+  let Modal = document.getElementById('LayerMenu');
+  
+  globalInput.locked = !globalInput.locked;
+
+  Overlay.hidden = !Overlay.hidden;
+  Modal.hidden = !Modal.hidden;
+}
+
+
+function HideOverlays(){
+  document.getElementById('CanvasOverlay').hidden = true;
+  document.getElementById('LayerMenu').hidden = true;
+  document.getElementById('CreateMenu').hidden = true;
+}
+
 //Add Functions to document
 window.ToggleColorSelect = ToggleColorSelect;
 window.ToggleCanvasMenu = ToggleCanvasMenu;
-
+window.ToggleLayerMenu = ToggleLayerMenu;
+window.HideOverlays = HideOverlays;
 
 //Export final Elements
 export {

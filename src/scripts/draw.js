@@ -78,7 +78,7 @@ function InitRenderer() {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-function AddCanvas(uid = '#0000') {
+function AddCanvas(uid = 'Canvas 1') {
     //Create new test canvas object
     let c = new canvas.Canvas(globalCanvas, globalInput.canvasSize);
     
@@ -98,12 +98,15 @@ function AddCanvas(uid = '#0000') {
     globalInput.currentLayer = 0;
 }
 
-function AddLayer() {
+function AddLayer(name = "Base Layer") {
     //Get Current canvas
     let c = canvasStack[globalInput.currentCanvas];
 
     //Add Layer
     let l = c.AddLayer(globalCanvas);
+
+    //Set Layer name
+    l.name = name;
 
     //Set the current Layer
     globalInput.currentLayer = c.layers.length - 1;

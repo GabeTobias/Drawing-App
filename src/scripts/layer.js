@@ -12,7 +12,7 @@ class Layer {
         this.size = size;
 
         //Create Layer Name
-        this.name = 'layer';
+        this.name = 'Base Layer';
 
         //Turn off stroke
         this.graphics.noStroke();
