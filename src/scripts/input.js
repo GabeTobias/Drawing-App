@@ -1,11 +1,15 @@
 //P5 Import
 import * as p5 from './p5.js';
 
-//Renderer Functions
-import { PenTool, BrushTool, EraserTool, AddCanvas, AddLayer } from './draw.js';
+//DOM Manipulation Import
+import * as dom from './dom'
 
-//Networl Interaction Events
+//Renderer Functions
+import { PenTool, BrushTool, EraserTool, AddLayer } from './draw.js';
+
+//Network Interaction Events
 import {IEvent, ISetLayer, IUpdateCursor} from './network'
+
 
 class Input
 {
@@ -16,12 +20,13 @@ class Input
 
     //TODO: Resize when this value changes
     //Canvas window Details
-    this.canvasSize = {width: 786, height: 543};
+    this.canvasSize = {width: 704, height: 624};
 
     //Brush Tool Properties
     this.toolType = 0;
     this.toolSize = 25;
-    this.toolColor = { r:255, g:255, b:255, a:25 };
+    this.toolColor = '#fff';
+    this.toolAlpha = 25;
     this.toolPressure = 1;
 
     //Set Eraser Properties
@@ -29,9 +34,14 @@ class Input
 
     //Key Down boolean
     this.clickHold = false;
+
+    //Modal Lock
+    this.locked = false;
   }
 
   Update(p, canvasStack){
+    if(this.locked) return;
+
     //Check for mouse input
     if(p.mouseIsPressed){
       //Apply tool behaviour based on tool type
@@ -62,6 +72,7 @@ class Input
       if(p.key === 'a') 
       {
         this.toolType = (this.toolType+1) % 3;
+        dom.RenderTool();
       }
 
       //Process click

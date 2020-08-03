@@ -26,19 +26,22 @@ function InitRenderer() {
 
         p5.setup = function () {
             //Start Canvas object
-            p5.createCanvas(
+            let c = p5.createCanvas(
                 globalInput.canvasSize.width,
                 globalInput.canvasSize.height
             );
 
+            //Attach canvas to div section
+            c.parent('CanvasSection');
+
             //Adjust Stroke
-            p5.stroke(255);
-            p5.strokeWeight(1);
+            p5.stroke('#f6ad55');
+            p5.strokeWeight(1.5);
         }
 
         p5.draw = function () {
             //Clear Screen
-            p5.background(40);
+            p5.background('#edf2f7');
 
             //Draw the current canvas
             canvasStack[globalInput.currentCanvas].Render(p5);
@@ -49,12 +52,12 @@ function InitRenderer() {
                 let c = userCursors[key];
 
                 //Draw Cursor
-                p5.fill(255, 50);
+                p5.fill(255, 100);
                 p5.ellipse(c.x, c.y, c.radius, c.radius);
             })
 
             //Draw Cursor to screen
-            p5.fill(255, 50);
+            p5.fill(255, 100);
             p5.ellipse(p5.mouseX, p5.mouseY, globalInput.toolSize, globalInput.toolSize);
 
             //Update Input Behaviour
@@ -89,7 +92,10 @@ function AddCanvas(uid = '#0000') {
     canvasStack[uid] = c;
 
     //Set current canvas
-    globalInput.currentCanvas = c.uid;
+    globalInput.currentCanvas = uid;
+
+    //Set Current Layer
+    globalInput.currentLayer = 0;
 }
 
 function AddLayer() {
@@ -120,6 +126,7 @@ function SetLayer(data) {
     canvas.layers[data.index].name = data.layer.name;
 }
 
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -133,6 +140,11 @@ function getLayer(tool)
     return canvas.layers[tool.currentLayer];
 }
 
+//Return the current selected canvas
+function getCanvas() { return canvasStack[globalInput.currentCanvas]; }
+
+//Return all canvases in the Renderer
+function getCanvasStack() { return canvasStack; }
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -169,7 +181,7 @@ function BrushTool(x, y, tool = globalInput) {
     let layer = getLayer(tool);
 
     //Draw Brush tool on current layer
-    layer.Brush(tool.toolSize, tool.toolColor, tool.pressure, x, y);
+    layer.Brush(tool.toolSize, tool.toolColor, tool.toolAlpha, tool.pressure, x, y);
 }
 
 
@@ -193,8 +205,9 @@ function BucketTool(x, y, tool = globalInput) { }
 
 export {
     InitRenderer,                                   //Render Objects 
-    AddCanvas, AddLayer, SetLayer,                  //Canvas DOM
-    globalInput, globalCanvas,                      //Globals variables
+    AddCanvas, AddLayer, SetLayer,                  //Canvas Functions
+    globalInput, globalCanvas,                      //Global variables
     PenTool, BrushTool, EraserTool, BucketTool,     //User Interactions
-    UpdateCursor                                    //HUD Functions
+    UpdateCursor,                                   //HUD Functions
+    getCanvas, getCanvasStack                       //DOM Getters
 }

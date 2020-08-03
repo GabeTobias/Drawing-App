@@ -1,0 +1,119 @@
+.layer
+{
+  display: block;
+  padding: 0.5rem;
+  font-size: .875rem;
+  font-weight: 300;
+  color: #a0aec0;
+  background-color: transparent;
+}
+
+.layer:hover
+{
+  color: #1a202c;
+  background-color: #f7fafc;
+}
+
+.layer:focus
+{
+  color: #1a202c;
+  background-color: #edf2f7;
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+.layer-active
+{
+  color: #1a202c;
+  background-color: #edf2f7;
+  border-color: #f6ad55;
+  border-right-width: 2px;
+}
+
+
+
+.tool-btn
+{
+  background-color: white;
+  
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  font-weight: 300;
+  color: #2d3748;
+
+  border-radius: 0.25rem;
+  border-width: 1px;
+  border-color: #e2e8f0;
+}
+
+.tool-btn:hover
+{
+  background-color: #f7fafc;
+}
+
+.tool-active
+{
+  border-color: #ed8936;
+}
+
+
+.color-select
+{
+  width: 2rem;
+  height: 2rem;
+
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  font-weight: 300;
+
+  border-color: #fff;
+  border-radius: 9999px;
+
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.color-select:hover
+{
+  opacity: 80%;
+}
+
+.tab
+{
+  display: inline-block;
+
+  background-color: #edf2f7;
+
+  font-size: .875rem;
+  font-weight: 300;
+
+  color: #cbd5e0;
+
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  border-right-width: 1px;
+  border-left-width: 1px;
+}
+
+.tab:hover
+{
+  color: #2c5282;
+}
+
+
+.tab-active
+{
+  background-color: white;
+
+  color: #718096;
+
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}

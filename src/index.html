@@ -4,10 +4,113 @@
     <meta charset="UTF-8">
     <title>Drawing App</title>
 
+    <!-- Webpack style sheet -->
     <link rel="stylesheet" href="./package_/styles.css">
+
   </head>
   <body>
-    <!-- You can also require other files to run in this process -->
+
+    <div class="flex h-screen">
+      <!-- Sidebar -->
+      <div class="w-1/5 text-center" id="SideBar">
+        <h2 class="border-b p-2 text-gray-700"> Layers </h2>
+
+        <!-- Add new Layer button -->
+        <button class="absolute px-1 border" style="top:0.4rem; left:17%" onclick="addLayer()">+</button>
+
+        <!-- Layer element list location -->
+        <div id="LayersGroup">
+        </div>
+      </div>
+
+      <div class="absolute bottom-0 w-1/5 pt-2 text-center">
+        <h2 class="border-b border-t pb-2 pt-2 ">Tools</h2>
+        
+        <!-- Tools -->
+        <div class="bg-gray-100 p-3 h-32 grid grid-cols-3 gap-3">
+
+          <!-- Tool Selection buttons -->
+          <button class="tool-btn tool-active" onclick="setTool(0)">
+            1
+          </button>
+          <button class="tool-btn" onclick="setTool(1)">
+            2
+          </button>
+          <button class="tool-btn" onclick="setTool(2)">
+            3
+          </button>
+          <button class="tool-btn">
+            4
+          </button>
+          <button class="tool-btn">
+            5
+          </button>
+          <button class="tool-btn">
+            6
+          </button>
+        </div>
+      </div>
+
+      <!-- Color Select Toggle -->
+      <button class="absolute px-1 border" style="bottom:8.5rem; left:17%" onclick="ToggleColorSelect()">+</button>
+
+      <!-- Color Select -->
+      <div class="absolute bg-gray-100 rounded shadow" style="left: 22%; bottom:1rem; height:9rem; width:9rem;" id="ColorToggle" hidden>
+        <div class=" p-3 h-32 grid grid-cols-3 gap-3">
+          <button class="bg-white color-select" onclick="setColor('#fff')" color="#fff"><br></button>
+          
+          <button class="bg-purple-500 color-select" onclick="setColor('#9f7aea')" color="#9f7aea"><br></button>
+          
+          <button class="bg-pink-500 color-select" onclick="setColor('#ed64a6')" color="#ed64a6"><br></button>
+
+          <button class="bg-green-500 color-select" onclick="setColor('#48bb78')" color="#48bb78"><br></button>
+
+          <button class="bg-teal-500 color-select"  onclick="setColor('#38b2ac')" color="#38b2ac"><br></button>
+          
+          <button class="bg-blue-500 color-select" onclick="setColor('#4299e1')" color="#4299e1"><br></button>
+          
+          <button class="bg-yellow-500 color-select" onclick="setColor('#ecc94b')" color="#ecc94b"><br></button>
+          
+          <button class="bg-orange-500 color-select" onclick="setColor('#ed8936')" color="#ed8936"><br></button>
+          
+          <button class="bg-red-500 color-select" onclick="setColor('#f56565')" color="#f56565"></button>
+        </div>
+      </div>
+
+      <!-- Modal Overlay -->
+      <div class="absolute w-4/5 h-full bg-black bg-opacity-50" style="left:20%;" id="CanvasOverlay" onclick="ToggleCanvasMenu()" hidden></div>
+
+      <!-- Create Canvas Overlay -->
+      <div class="absolute w-56 bg-white text-center shadow rounded" style="left: 48%; top:25vh; height:5.3rem;" id="CreateMenu" hidden>
+        <h2 class="border-b border-t py-2 px-4 text-sm text-gray-500">Create Canvas</h2>
+        
+        <!-- TODO: Refactor into css classes -->
+        <div class="mb-4 p-2 pt-3 text-left">
+          <input class="w-3/4 float-left appearance-none border rounded rounded-r-none py-1 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:shadow-outline" id="canvasName" type="text" placeholder="Name">
+          <button class="w-1/4 text-sm bg-orange-500 hover:bg-orange-600 text-white font-light py-1 px-1 rounded rounded-l-none leading-tight" onclick="addCanvas()">
+            create
+          </button>
+        </div>
+      </div>
+
+      <!-- Canvas Section -->
+      <div class="w-4/5 bg-gray-200 text-center">
+      
+        <!-- Canvas Tabs -->
+        <ul class="flex border-b bg-gray-100" id="CanvasGroup">
+
+          <!-- Add Canvas Button -->
+          <li class="float-right">
+            <a class="bg-white inline-block py-2 px-4 text-gray-600 hover:text-grey-800 font-light text-sm border-r border-l" href="#" onclick="RenderCanvas()">+</a>
+          </li>
+        </ul>
+
+        <!-- P5 Canvas  -->
+        <div id="CanvasSection"></div>
+
+      </div>
+    </div>
+    
     <script src="./package_/bundle.js"></script>
     <script src="./package_/styles.js"></script>
   </body>

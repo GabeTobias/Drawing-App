@@ -1,11 +1,19 @@
 //Sass import
-import '../styles/styles.sass';
+import '../styles/styles.scss';
 
 //DrawJS Import
 import * as renderer from './draw';
 
 //NetworkJS Import
 import * as network from './network';
+
+//DOM Manipulation Import
+import * as dom from './dom'
+
+//Pass Input to dom
+window.globalInput = renderer.globalInput;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 //Start Canvas Renderer
@@ -19,3 +27,10 @@ renderer.AddLayer();
 
 //Join Network Room
 network.IJoinRoom(renderer.globalInput.currentCanvas);
+
+//Initial Canvas Render
+dom.RenderLayers(); 
+dom.RenderCanvas();
+dom.RenderTool();
+dom.RenderColor();
+

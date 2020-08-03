@@ -28,14 +28,21 @@ class Layer {
 
     //TODO: Take in a brush object instead of a radius
     Pen(radius, color, x, y) {
+        //Calculate color from params
+        let c = this.graphics.color(color);
+        
         //Set Color of the ellipse and draw
-        this.graphics.fill(color.r,color.g,color.b);
+        this.graphics.fill(c);
         this.graphics.ellipse(x, y, radius);
     }
 
-    Brush(radius, color, pressure, x, y) {
+    Brush(radius, color, alpha, pressure, x, y) {
+        //Calculate color from params
+        let c = this.graphics.color(color);
+        c.setAlpha(alpha);
+        
         //Set Color of the ellipse and draw
-        this.graphics.fill(color.r, color.g, color.b, color.a);
+        this.graphics.fill(c);
         this.graphics.ellipse(x, y, radius);
     }
 
