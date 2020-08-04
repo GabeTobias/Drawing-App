@@ -4,6 +4,9 @@ import * as p5Canvas from './p5.js';
 //Canvas class import
 import * as canvas from './canvas'
 
+//DOM Manipulation Import
+import * as dom from './dom'
+
 //Input info import
 import { globalInput } from './input'
 
@@ -127,6 +130,9 @@ function SetLayer(data) {
 
     //Set Layer name
     canvas.layers[data.index].name = data.layer.name;
+
+    //Render DOM
+    dom.RenderLayers();
 }
 
 
@@ -203,6 +209,20 @@ function EraserTool(x, y, tool = globalInput) {
 function BucketTool(x, y, tool = globalInput) { }
 
 
+function ReorderLayers(uid, array) {
+    //Check if canvas is open
+    if(canvasStack[uid] === undefined) return;
+
+    //Get Current Canvas
+    let canvas = canvasStack[uid];
+
+    //Reorder Layers of a canvas
+    canvas.SortLayers(array);
+
+    //Update DOM
+    dom.RenderLayers();
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -211,6 +231,6 @@ export {
     AddCanvas, AddLayer, SetLayer,                  //Canvas Functions
     globalInput, globalCanvas,                      //Global variables
     PenTool, BrushTool, EraserTool, BucketTool,     //User Interactions
-    UpdateCursor,                                   //HUD Functions
+    UpdateCursor, ReorderLayers,                    //HUD Functions
     getCanvas, getCanvasStack                       //DOM Getters
 }

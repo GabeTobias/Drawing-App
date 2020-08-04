@@ -33,7 +33,11 @@ io.on('connect', socket => {
         if (RoomArr[data.uid] === undefined) {
             RoomArr[data.uid] = {
                 events: [],
-                layers: []
+                layers: [{
+                    uid: 'Canvas 1',
+                    index: 0,
+                    layer: { size: { width: 704, height: 624 }, name: 'Base Layer' }
+                  }]
             };
         }
 
@@ -41,7 +45,7 @@ io.on('connect', socket => {
         let room = RoomArr[data.uid];
 
         //Loop threw all layers
-        for (let i in room.layers) {
+        for (let i = 0; i < room.layers.length; i++) {
             //Get layer object
             let layer = room.layers[i];
 
@@ -50,7 +54,7 @@ io.on('connect', socket => {
         }
 
         //Loop threw all events
-        for (let i in room.events) {
+        for (let i = 0; i < room.events.length; i++) {
             //Get event object
             let event = room.events[i];
 
@@ -69,6 +73,40 @@ io.on('connect', socket => {
 
         //Store Layer info in Room Array
         RoomArr[data.uid].layers[data.index] = data;
+    });
+
+
+    //Ping Pong Reorder Event
+    socket.on('ReorderCanvas', (data) => {
+        //Emit Event to users
+        socket.broadcast.emit('ReorderCanvas', data);
+
+        //Change Layer order information
+        let arr = [];
+    
+        //Loop threw array elements in order
+        for(let i in data.array)
+        {
+            //Loop threw all layers in canvas
+            for(let j in RoomArr[data.uid].layers)
+            {
+
+                //Check if names are equal
+                if(RoomArr[data.uid].layers[j].layer.name == data.array[i]){
+                    
+                    //Set layer index
+                    RoomArr[data.uid].layers[j].index = arr.length;
+
+                    //Add layer to new list
+                    arr.push(RoomArr[data.uid].layers[j]);
+
+                    break;
+                }
+            }
+        }
+
+        //Set the new layers array
+        RoomArr[data.uid].layers = arr;
     });
 
     //////////////////////////////////////////////////////////////////////////////////////////

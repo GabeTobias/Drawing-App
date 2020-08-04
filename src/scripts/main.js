@@ -25,6 +25,7 @@ renderer.AddCanvas();
 //Join Network Room
 network.IJoinRoom(renderer.globalInput.currentCanvas);
 
+
 //Initial Canvas Render
 dom.RenderLayers(); 
 dom.RenderCanvas();

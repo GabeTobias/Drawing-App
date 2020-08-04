@@ -34,6 +34,10 @@ socket.on('UpdateLayer', data => { renderer.SetLayer(data); });
 //User Cursor Callback
 socket.on('UpdateCursor', data => { renderer.UpdateCursor(data); });
 
+//Canvas Reorder Event
+socket.on('ReorderCanvas', data => { renderer.ReorderLayers(data.uid, data.array); });
+
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 //Join room server message
@@ -48,7 +52,10 @@ function IEvent(type, data){ socket.emit(type,data); }
 //Send User Curosr information
 function IUpdateCursor(data) { socket.emit('UpdateCursor', data); }
 
+//Send Reorder message
+function IReorder(uid,arr){ socket.emit('ReorderCanvas', {uid:uid, array:arr } ); }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-export { IJoinRoom, ISetLayer, IEvent, IUpdateCursor };
+export { IJoinRoom, ISetLayer, IEvent, IUpdateCursor, IReorder };

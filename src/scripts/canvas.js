@@ -66,7 +66,7 @@ class Canvas {
       for(let j in this.layers)
       {
         //Check if names are equal
-        if(this.layers[j].name == layerElem[i].innerHTML){
+        if(this.layers[j].name == layerElem[i]){
           //Add layer to new list
           arr.push(this.layers[j]);
           break;

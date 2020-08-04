@@ -1,6 +1,12 @@
 //DrawJS Import
 import * as renderer from './draw';
 
+//NetworkJS Import
+import * as network from './network';
+
+//Global Tool import
+import { globalInput } from './input';
+
 
 function RenderLayers() {
   //get the sidebar div
@@ -11,7 +17,6 @@ function RenderLayers() {
 
   //Get Layers array
   let canvas = renderer.getCanvas();
-
 
   //Loop threw the layers
   for(let i in canvas.layers)
@@ -123,7 +128,10 @@ function addLayer() {
   let name = document.getElementById('layerName').value;
 
   //Add Layer to renderer
-  renderer.AddLayer(name);
+  let layer = renderer.AddLayer(name);
+
+  //Fire Network event
+  network.ISetLayer(globalInput.currentCanvas, {size: layer.size, name: layer.name}, globalInput.currentLayer);
 
   //Rerender DOM
   RenderLayers();
@@ -185,7 +193,20 @@ $( "#LayersGroup" ).sortable();
 
 //Trigger sort event after sort release
 $( "#LayersGroup" ).on( "sortstop", function( event, ui ) {
-  renderer.getCanvas().SortLayers(document.getElementsByClassName('layer'));
+  //Get Layer elements from DOM
+  let elem = document.getElementsByClassName('layer');
+  let arr = [];
+
+  //Add element names to new array
+  for(let i = 0; i < elem.length; i++){
+    arr.push(elem[i].innerHTML);
+  }
+
+  //Sort Array by the element names
+  renderer.getCanvas().SortLayers(arr);
+
+  //Fire Network event
+  network.IReorder(globalInput.currentCanvas, arr);
 } );
 
 
