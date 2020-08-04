@@ -49,7 +49,7 @@ function RenderCanvas() {
     let active = renderer.globalInput.currentCanvas == i;
 
     //Add New Element to dom
-    div.innerHTML += '<li class=""> <a class="tab ' + ((active) ? 'tab-active':'') + '" href="#" onclick="changeCanvas('+canvas.uid+')">' + canvas.uid + '</a> </li>';
+    div.innerHTML += '<li class=""> <a class="tab ' + ((active) ? 'tab-active':'') + '" href="#" onclick="changeCanvas(\''+canvas.uid+'\')">' + canvas.uid + '</a> </li>';
   }
 
   //Add Create Canvas Button
@@ -121,6 +121,7 @@ function changeCanvas(uid) {
   
   //Rerender canvas DOM
   RenderCanvas();
+  RenderLayers();
 }
 
 function addLayer() {
@@ -146,6 +147,9 @@ function addCanvas() {
   
   //Create Canvas with given name
   renderer.AddCanvas(uid);
+
+  //Join Network Room
+  network.IJoinRoom(renderer.globalInput.currentCanvas);
 
   //Render DOM
   RenderCanvas();
