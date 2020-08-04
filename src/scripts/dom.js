@@ -21,7 +21,7 @@ function RenderLayers() {
     let active = renderer.globalInput.currentLayer == i;
 
     //Add New Element to dom
-    div.innerHTML += '<a class="layer ' + ((active) ? 'layer-active':'') + '" href="#" onclick="changeLayer('+i+') ">' + layer.name + '</a>';
+    div.innerHTML += '<a class="layer ' + ((active) ? 'layer-active':'') + '" href="#" onclick="changeLayer('+i+')" >' + layer.name + '</a>';
   }
 }
 
@@ -176,6 +176,18 @@ function setTool(tool){
 //Add Function to document
 window.setColor = setColor;
 window.setTool = setTool;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//Make Layer list sortables
+$( "#LayersGroup" ).sortable();
+
+//Trigger sort event after sort release
+$( "#LayersGroup" ).on( "sortstop", function( event, ui ) {
+  renderer.getCanvas().SortLayers(document.getElementsByClassName('layer'));
+} );
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

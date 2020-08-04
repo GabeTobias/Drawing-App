@@ -7,6 +7,10 @@
     <!-- Webpack style sheet -->
     <link rel="stylesheet" href="./package_/styles.css">
 
+    <!-- JQuery include -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
   </head>
   <body>
 
@@ -55,7 +59,7 @@
       <button class="absolute px-1 border" style="bottom:8.5rem; left:17%" onclick="ToggleColorSelect()">+</button>
 
       <!-- Color Select -->
-      <div class="absolute bg-gray-100 rounded shadow" style="left: 22%; bottom:1rem; height:9rem; width:9rem;" id="ColorToggle" hidden>
+      <div class="absolute bg-gray-100 rounded shadow" style="left: 22%; bottom:1rem; height:9rem; width:9rem;" id="ColorToggle" onmouseenter="globalInput.selecting = true;"  onmouseleave="globalInput.selecting = false;" hidden>
         <div class=" p-3 h-32 grid grid-cols-3 gap-3">
           <button class="bg-white color-select" onclick="setColor('#fff')" color="#fff"><br></button>
           

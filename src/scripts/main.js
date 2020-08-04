@@ -30,4 +30,3 @@ dom.RenderLayers();
 dom.RenderCanvas();
 dom.RenderTool();
 dom.RenderColor();
-

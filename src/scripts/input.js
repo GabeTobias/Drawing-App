@@ -37,10 +37,20 @@ class Input
 
     //Modal Lock
     this.locked = false;
+
+    //Color select flag
+    this.selecting = false;
   }
 
   Update(p, canvasStack){
+    //Check for modal lock
     if(this.locked) return;
+
+    //Checks if over canvas
+    if(p.mouseX < 0 || p.mouseY < 0) return;
+
+    //Check if over color select
+    if(this.selecting) return;
 
     //Check for mouse input
     if(p.mouseIsPressed){

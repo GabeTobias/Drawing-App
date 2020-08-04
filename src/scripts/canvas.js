@@ -30,7 +30,7 @@ class Canvas {
     this.graphics.clear();
 
     //Loop threw all registered layers
-    for (let l in this.layers) {
+    for (let l = 0; l < this.layers.length; l++) {
       //Get Layer from array
       let layer = this.layers[l];
 
@@ -54,6 +54,29 @@ class Canvas {
 
     //Return the new layer
     return l;
+  }
+
+  SortLayers(layerElem){
+    let arr = [];
+    
+    //Loop threw array elements in order
+    for(let i in layerElem)
+    {
+      //Loop threw all layers in canvas
+      for(let j in this.layers)
+      {
+        //Check if names are equal
+        if(this.layers[j].name == layerElem[i].innerHTML){
+          //Add layer to new list
+          arr.push(this.layers[j]);
+          break;
+        }
+      }
+    }
+
+    this.layers = arr;
+
+    console.log(this.layers);
   }
 };
 
